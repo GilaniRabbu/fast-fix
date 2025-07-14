@@ -1,10 +1,10 @@
 import ContainerWrapper from "@/components/common/ContainerWrapper";
 import Categories from "@/components/home/Categories";
-// import FAQs from "@/components/home/FAQs";
+import FAQs from "@/components/home/FAQs";
 import Hero from "@/components/home/Hero";
 import HowItWorks from "@/components/home/HowItWorks";
 import ServiceProviders from "@/components/home/ServiceProviders";
-// import Testimonials from "@/components/home/Testimonials";
+import Testimonials from "@/components/home/Testimonials";
 
 export default function Home() {
   return (
@@ -18,8 +18,8 @@ export default function Home() {
         <ContainerWrapper>
           <HowItWorks />
         </ContainerWrapper>
-        {/* <Testimonials />
-        <FAQs /> */}
+        <Testimonials />
+        <FAQs />
       </div>
     </>
   );
