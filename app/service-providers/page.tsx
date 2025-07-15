@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { toast } from "sonner";
-import { Search, MapPin, Bookmark } from "lucide-react";
 
 interface Category {
   name: string;
@@ -39,7 +38,9 @@ export default function ServiceProvidersPage() {
   useEffect(() => {
     const fetchProviders = async () => {
       try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_BASEURL}/service-providers/filter`);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASEURL}/service-providers/filter`
+        );
         setProviders(res.data.data);
       } catch (error) {
         console.error("Failed to fetch service providers", error);
@@ -51,7 +52,9 @@ export default function ServiceProvidersPage() {
 
     const fetchCategories = async () => {
       try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_BASEURL}/service-providers/categories`);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASEURL}/service-providers/categories`
+        );
         setServiceCategories(res.data.data);
       } catch (error) {
         console.error("Failed to fetch categories", error);
@@ -67,7 +70,7 @@ export default function ServiceProvidersPage() {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFilters(prev => ({ ...prev, [name]: value }));
+    setFilters((prev) => ({ ...prev, [name]: value }));
 
     // Trigger filter update
     applyFilters({ ...filters, [name]: value });
@@ -75,7 +78,7 @@ export default function ServiceProvidersPage() {
 
   const handleCategoryChange = (category: string) => {
     const newProfession = filters.profession === category ? "" : category;
-    setFilters(prev => ({ ...prev, profession: newProfession }));
+    setFilters((prev) => ({ ...prev, profession: newProfession }));
     applyFilters({ ...filters, profession: newProfession });
   };
 
@@ -92,7 +95,9 @@ export default function ServiceProvidersPage() {
   const fetchAllProviders = async () => {
     setFilterLoading(true);
     try {
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_BASEURL}/service-providers/filter`);
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASEURL}/service-providers/filter`
+      );
       setProviders(res.data.data);
     } catch (error) {
       console.error("Failed to fetch service providers", error);
@@ -106,14 +111,18 @@ export default function ServiceProvidersPage() {
     setFilterLoading(true);
     try {
       const params: any = {};
-      if (updatedFilters.profession) params.profession = updatedFilters.profession;
+      if (updatedFilters.profession)
+        params.profession = updatedFilters.profession;
       if (updatedFilters.location) params.location = updatedFilters.location;
       if (updatedFilters.experienceYears)
         params.experienceYears = parseInt(updatedFilters.experienceYears);
 
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_BASEURL}/service-providers/filter`, {
-        params,
-      });
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASEURL}/service-providers/filter`,
+        {
+          params,
+        }
+      );
 
       if (res.data.data && res.data.data.length > 0) {
         setProviders(res.data.data);
@@ -135,7 +144,9 @@ export default function ServiceProvidersPage() {
       {/* Header */}
       <header className="bg-gradient-to-r from-indigo-900 to-purple-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h1 className="text-4xl font-bold text-center">Find Top Service Providers</h1>
+          <h1 className="text-4xl font-bold text-center">
+            Find Top Service Providers
+          </h1>
         </div>
       </header>
 
@@ -167,7 +178,10 @@ export default function ServiceProvidersPage() {
                 </div>
                 <div className="space-y-2">
                   {serviceCategories.map((category) => (
-                    <div key={category.name} className="flex items-center space-x-2">
+                    <div
+                      key={category.name}
+                      className="flex items-center space-x-2"
+                    >
                       <input
                         type="checkbox"
                         id={category.name}
@@ -175,7 +189,10 @@ export default function ServiceProvidersPage() {
                         onChange={() => handleCategoryChange(category.name)}
                         className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       />
-                      <label htmlFor={category.name} className="text-sm text-gray-700">
+                      <label
+                        htmlFor={category.name}
+                        className="text-sm text-gray-700"
+                      >
                         {category.name} ({category.total})
                       </label>
                     </div>
@@ -188,7 +205,9 @@ export default function ServiceProvidersPage() {
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-medium text-gray-900">Location</h3>
                   <button
-                    onClick={() => setFilters(prev => ({ ...prev, location: "" }))}
+                    onClick={() =>
+                      setFilters((prev) => ({ ...prev, location: "" }))
+                    }
                     className="text-blue-600 text-xs hover:text-blue-700"
                   >
                     Clear
@@ -207,9 +226,13 @@ export default function ServiceProvidersPage() {
               {/* Experience Filter */}
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-medium text-gray-900">Years of Experience</h3>
+                  <h3 className="font-medium text-gray-900">
+                    Years of Experience
+                  </h3>
                   <button
-                    onClick={() => setFilters(prev => ({ ...prev, experienceYears: "" }))}
+                    onClick={() =>
+                      setFilters((prev) => ({ ...prev, experienceYears: "" }))
+                    }
                     className="text-blue-600 text-xs hover:text-blue-700"
                   >
                     Clear
@@ -236,15 +259,21 @@ export default function ServiceProvidersPage() {
             {/* Results Header */}
             <div className="flex items-center justify-between mb-6">
               <p className="text-gray-600">
-                {filterLoading ? "Loading..." : `${providers.length} service providers found`}
+                {filterLoading
+                  ? "Loading..."
+                  : `${providers.length} service providers found`}
               </p>
             </div>
 
             {/* Service Provider Listings */}
             {loading ? (
-              <div className="text-center py-20 text-gray-500">Loading providers...</div>
+              <div className="text-center py-20 text-gray-500">
+                Loading providers...
+              </div>
             ) : providers.length === 0 ? (
-              <div className="text-center py-20 text-gray-500">No providers found</div>
+              <div className="text-center py-20 text-gray-500">
+                No providers found
+              </div>
             ) : (
               <div className="space-y-4">
                 {providers.map((provider) => (
@@ -256,28 +285,36 @@ export default function ServiceProvidersPage() {
                       {/* Left: Initial & Provider Info */}
                       <div className="flex space-x-4">
                         <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                          <span className="text-white font-bold text-sm">{provider.firstName[0]}</span>
+                          <span className="text-white font-bold text-sm">
+                            {provider.firstName[0]}
+                          </span>
                         </div>
                         <div>
                           <h3 className="text-lg font-semibold text-gray-900 mb-1">
                             {provider.firstName} {provider.lastName}
                           </h3>
-                          <p className="text-gray-600 mb-3">{provider.location}</p>
+                          <p className="text-gray-600 mb-3">
+                            {provider.location}
+                          </p>
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                             <div>
                               <span className="text-gray-500">Profession</span>
-                              <p className="font-medium">{provider.profession}</p>
+                              <p className="font-medium">
+                                {provider.profession}
+                              </p>
                             </div>
                             <div>
                               <span className="text-gray-500">Experience</span>
-                              <p className="font-medium">{provider.experienceYears} years</p>
+                              <p className="font-medium">
+                                {provider.experienceYears} years
+                              </p>
                             </div>
                           </div>
-                          <p className="text-gray-500 text-sm mt-4">{provider.bio}</p>
+                          <p className="text-gray-500 text-sm mt-4">
+                            {provider.bio}
+                          </p>
                         </div>
                       </div>
-
-                      
                     </div>
 
                     {/* Contact Button aligned bottom right */}

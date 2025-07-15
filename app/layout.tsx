@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-// import { Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import ReduxProvider from "@/redux/ReduxProvider";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
 import Header from "@/components/shared/Header";
 import "./globals.css";
 
-// const inter = Inter({
-//   weight: ["500"],
-//   subsets: ["latin"],
-// });
+const inter = Inter({
+  weight: ["500"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         <ReduxProvider>
           <ThemeProvider
             attribute="class"

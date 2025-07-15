@@ -1,11 +1,11 @@
 /*eslint-disable*/
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Eye, EyeOff, User, Building2 } from "lucide-react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { toast } from "sonner"
+import { useState } from "react";
+import { Eye, EyeOff, User, Building2 } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface FormData {
   firstName: string;
@@ -23,11 +23,13 @@ interface FormData {
 }
 
 export default function SignupPage() {
-  const [userType, setUserType] = useState<"CUSTOMER" | "SERVICE_PROVIDER">("CUSTOMER")
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [isLoading, setLoading] = useState(false)
-  const router = useRouter()
+  const [userType, setUserType] = useState<"CUSTOMER" | "SERVICE_PROVIDER">(
+    "CUSTOMER"
+  );
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -41,107 +43,125 @@ export default function SignupPage() {
     hourlyRate: 0,
     bio: "",
     role: "CUSTOMER", // Initialize with default, will be updated dynamically
-  })
-  const [error, setError] = useState<string | null>(null)
+  });
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
-    const { name, value, type } = e.target
+    const { name, value, type } = e.target;
 
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: type === "number" ? Number(value) : value,
       role: userType,
-    }))
-  }
-
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setError(null)
+    e.preventDefault();
+    setError(null);
 
     // Basic validation
     if (formData.password !== formData.confirmPassword) {
-      setError("Invalid password: Passwords do not match")
-      return
+      setError("Invalid password: Passwords do not match");
+      return;
     }
 
     if (formData.password.length < 8) {
-      setError("Invalid password: Password must be at least 8 characters long")
-      return
+      setError("Invalid password: Password must be at least 8 characters long");
+      return;
     }
 
     // Validate required provider fields
     if (userType === "SERVICE_PROVIDER") {
-      if (!formData.profession || !formData.experienceYears || !formData.hourlyRate) {
-        setError("Please fill out all required provider fields")
-        return
+      if (
+        !formData.profession ||
+        !formData.experienceYears ||
+        !formData.hourlyRate
+      ) {
+        setError("Please fill out all required provider fields");
+        return;
       }
     }
 
     try {
-      setLoading(true)
+      setLoading(true);
       // Prepare data for submission, excluding confirmPassword
-      const { confirmPassword, ...restData } = formData
-      const { bio, profession, experienceYears, hourlyRate, ...customerData } = restData
-      let submissionData
+      const { confirmPassword, ...restData } = formData;
+      const { bio, profession, experienceYears, hourlyRate, ...customerData } =
+        restData;
+      let submissionData;
 
       if (userType === "CUSTOMER") {
-        submissionData = customerData
+        submissionData = customerData;
       } else {
         submissionData = {
           ...restData,
           experienceYears: parseInt(experienceYears) || 0, // Convert experienceYears to number
           hourlyRate: hourlyRate || 0, // Ensure hourlyRate is also a number
-        }
+        };
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/users/create`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(submissionData),
-      })
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASEURL}/users/create`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(submissionData),
+        }
+      );
 
-      const responseData = await response.json()
+      const responseData = await response.json();
 
       if (responseData.success) {
-        toast.success("Account Created Successfully")
-        router.push("/login")
-        setLoading(false)
+        toast.success("Account Created Successfully");
+        router.push("/login");
+        setLoading(false);
       }
     } catch (err: any) {
-      setLoading(false)
-      const errorMessage = err.message || "An error occurred during signup. Please try again."
-      setError(errorMessage)
-      console.error("Signup error:", err)
+      setLoading(false);
+      const errorMessage =
+        err.message || "An error occurred during signup. Please try again.";
+      setError(errorMessage);
+      console.error("Signup error:", err);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-blue-100">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Your Account</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              Create Your Account
+            </h1>
           </div>
-
-
 
           <div className="mb-8">
             <div className="flex bg-gray-100 rounded-lg p-1">
               <button
                 onClick={() => setUserType("CUSTOMER")}
-                className={`flex-1 flex items-center justify-center cursor-pointer py-3 px-4 rounded-md text-sm font-medium transition-all ${userType === "CUSTOMER" ? "bg-white text-gray-900 shadow-sm" : "text-gray-600 hover:text-gray-900"}`}
+                className={`flex-1 flex items-center justify-center cursor-pointer py-3 px-4 rounded-md text-sm font-medium transition-all ${
+                  userType === "CUSTOMER"
+                    ? "bg-white text-gray-900 shadow-sm"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
               >
                 <User className="w-4 h-4 mr-2" />
                 Customer Registration
               </button>
               <button
                 onClick={() => setUserType("SERVICE_PROVIDER")}
-                className={`flex-1 flex items-center justify-center cursor-pointer py-3 px-4 rounded-md text-sm font-medium transition-all ${userType === "SERVICE_PROVIDER" ? "bg-white text-gray-900 shadow-sm" : "text-gray-600 hover:text-gray-900"}`}
+                className={`flex-1 flex items-center justify-center cursor-pointer py-3 px-4 rounded-md text-sm font-medium transition-all ${
+                  userType === "SERVICE_PROVIDER"
+                    ? "bg-white text-gray-900 shadow-sm"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
               >
                 <Building2 className="w-4 h-4 mr-2" />
                 Service Provider
@@ -152,7 +172,10 @@ export default function SignupPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="firstName"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   First Name *
                 </label>
                 <input
@@ -166,7 +189,10 @@ export default function SignupPage() {
                 />
               </div>
               <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="lastName"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Last Name *
                 </label>
                 <input
@@ -182,7 +208,10 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Email Address *
               </label>
               <input
@@ -197,7 +226,10 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Phone Number *
               </label>
               <input
@@ -213,7 +245,10 @@ export default function SignupPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Password *
                 </label>
                 <div className="relative mt-1">
@@ -240,7 +275,10 @@ export default function SignupPage() {
                 </div>
               </div>
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Confirm Password *
                 </label>
                 <div className="relative mt-1">
@@ -269,7 +307,10 @@ export default function SignupPage() {
             </div>
 
             <div>
-              <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="location"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Location
               </label>
               <input
@@ -287,7 +328,10 @@ export default function SignupPage() {
               <>
                 <div className="grid grid-cols-1 gap-6">
                   <div>
-                    <label htmlFor="profession" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="profession"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Profession *
                     </label>
                     <select
@@ -312,7 +356,10 @@ export default function SignupPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="experienceYears" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="experienceYears"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Years of Experience *
                     </label>
                     <select
@@ -333,7 +380,10 @@ export default function SignupPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="hourlyRate" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="hourlyRate"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Hourly Rate (in BDT) *
                   </label>
                   <input
@@ -350,7 +400,10 @@ export default function SignupPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="bio" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="bio"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Professional Bio
                   </label>
                   <textarea
@@ -366,7 +419,10 @@ export default function SignupPage() {
               </>
             )}
             {error && (
-              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+              <div
+                className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+                role="alert"
+              >
                 <span className="block sm:inline">{error}</span>
               </div>
             )}
@@ -377,13 +433,22 @@ export default function SignupPage() {
                 required
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <label htmlFor="terms" className="text-sm text-gray-700 leading-5">
+              <label
+                htmlFor="terms"
+                className="text-sm text-gray-700 leading-5"
+              >
                 I agree to the{" "}
-                <Link href="/terms" className="text-blue-600 hover:text-blue-700">
+                <Link
+                  href="/terms"
+                  className="text-blue-600 hover:text-blue-700"
+                >
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link href="/privacy" className="text-blue-600 hover:text-blue-700">
+                <Link
+                  href="/privacy"
+                  className="text-blue-600 hover:text-blue-700"
+                >
                   Privacy Policy
                 </Link>
               </label>
@@ -393,20 +458,27 @@ export default function SignupPage() {
               type="submit"
               disabled={isLoading}
               className={`w-full py-3 cursor-pointer px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2
-                ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-900 hover:bg-gray-800 text-white focus:ring-gray-900'}
+                ${
+                  isLoading
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-gray-900 hover:bg-gray-800 text-white focus:ring-gray-900"
+                }
               `}
             >
-              {isLoading ? 'Creating Account...' : 'Create Account'}
+              {isLoading ? "Creating Account..." : "Create Account"}
             </button>
           </form>
           <div className="text-sm text-gray-600 flex items-end justify-center pt-5 w-full gap-1">
             Already have an account?{" "}
-            <Link href="/login" className="text-blue-600 hover:text-blue-700 font-medium">
+            <Link
+              href="/login"
+              className="text-blue-600 hover:text-blue-700 font-medium"
+            >
               Login
             </Link>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

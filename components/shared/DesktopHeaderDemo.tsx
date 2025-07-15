@@ -1,12 +1,12 @@
 "use client";
+
 import React, { useState, ChangeEvent } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { Search, User, LayoutDashboard, Settings, LogOut } from "lucide-react";
-
-import ContainerWrapper from "../common/ContainerWrapper";
-import Logo from "./Logo";
+import ContainerWrapper from "@/components/common/ContainerWrapper";
 import { selectCurrentUser } from "@/redux/slice/authSlice";
+import Logo from "./Logo";
 
 // Interface for a service provider
 interface IServiceProvider {

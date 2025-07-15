@@ -3,14 +3,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import {
-  LayoutDashboard,
-  Calendar,
-  Settings,
-  LogOut,
-  Menu,
-  X,
-} from "lucide-react";
+import { LayoutDashboard, Settings, LogOut, Menu, X } from "lucide-react";
 import Logo from "@/components/shared/Logo";
 
 export default function UserSidebar() {
@@ -68,10 +61,11 @@ export default function UserSidebar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed lg:sticky lg:top-0 inset-y-0 min-h-screen left-0 z-50 w-52 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen
-          ? "translate-x-0"
-          : "-translate-x-full lg:translate-x-0"
-          }`}
+        className={`fixed lg:sticky lg:top-0 inset-y-0 min-h-screen left-0 z-50 w-52 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen
+            ? "translate-x-0"
+            : "-translate-x-full lg:translate-x-0"
+        }`}
       >
         <div className="flex flex-col min-h-screen justify-between">
           {/* Header */}
@@ -91,10 +85,11 @@ export default function UserSidebar() {
                     <Link
                       href={item.href}
                       onClick={() => setActiveSection(item.id)}
-                      className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-sm text-left transition-colors duration-200 ${isActive
-                        ? "bg-gradient-to-r from-pink-400 to-purple-500 text-white"
-                        : "text-gray-600 hover:bg-gradient-to-r hover:from-pink-400 hover:to-purple-500 hover:text-white"
-                        }`}
+                      className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-sm text-left transition-colors duration-200 ${
+                        isActive
+                          ? "bg-gradient-to-r from-pink-400 to-purple-500 text-white"
+                          : "text-gray-600 hover:bg-gradient-to-r hover:from-pink-400 hover:to-purple-500 hover:text-white"
+                      }`}
                     >
                       <Icon size={14} />
                       <span className="font-medium text-sm">{item.label}</span>

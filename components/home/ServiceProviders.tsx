@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Bookmark, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import ContainerWrapper from "../common/ContainerWrapper";
 import axios from "axios";
 import Link from "next/link";
@@ -27,7 +27,9 @@ const ServiceProviders = () => {
   useEffect(() => {
     const fetchProviders = async () => {
       try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_BASEURL}/service-providers`);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASEURL}/service-providers`
+        );
         setProviders(res.data.data);
       } catch (error) {
         console.error("Failed to fetch service providers", error);
@@ -48,15 +50,24 @@ const ServiceProviders = () => {
   };
 
   if (loading) {
-    return <div className="text-center py-10 text-gray-500">Loading providers...</div>;
+    return (
+      <div className="text-center py-10 text-gray-500">
+        Loading providers...
+      </div>
+    );
   }
 
   return (
     <div className="py-16 w-full bg-gray-50">
       <ContainerWrapper>
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">Explore Popular Service Providers</h2>
-          <Link href="/service-providers" className="border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-50 transition">
+          <h2 className="text-3xl font-bold text-gray-900">
+            Explore Popular Service Providers
+          </h2>
+          <Link
+            href="/service-providers"
+            className="border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-50 transition"
+          >
             View All Providers
           </Link>
         </div>
@@ -74,8 +85,6 @@ const ServiceProviders = () => {
                   <div className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white font-bold text-sm">
                     {provider.firstName.charAt(0)}
                   </div>
-
-
                 </div>
 
                 {/* Name */}
@@ -84,7 +93,9 @@ const ServiceProviders = () => {
                 </div>
 
                 {/* Profession */}
-                <h2 className="text-xl font-bold text-gray-900 mt-1">{provider.profession}</h2>
+                <h2 className="text-xl font-bold text-gray-900 mt-1">
+                  {provider.profession}
+                </h2>
 
                 {/* Experience */}
                 <div className="mt-3">
@@ -96,7 +107,9 @@ const ServiceProviders = () => {
                 {/* Rate & Location */}
                 <div className="mt-4 flex justify-between items-end">
                   <div>
-                    <div className="text-gray-900 font-bold">${provider.hourlyRate}/hr</div>
+                    <div className="text-gray-900 font-bold">
+                      ${provider.hourlyRate}/hr
+                    </div>
                     <div className="text-gray-500 text-sm flex items-center gap-1">
                       <MapPin className="w-4 h-4" /> {provider.location}
                     </div>

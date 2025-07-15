@@ -25,10 +25,11 @@ const SettingsSidebar = () => {
               <Link
                 href={`/user/settings/${tab.id}`}
                 key={tab.id}
-                className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${isActive
-                  ? "bg-red-50 text-red-600 border border-red-200"
-                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                  }`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isActive
+                    ? "bg-red-50 text-red-600 border border-red-200"
+                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+                }`}
               >
                 <Icon className="w-4 h-4" />
                 {tab.label}

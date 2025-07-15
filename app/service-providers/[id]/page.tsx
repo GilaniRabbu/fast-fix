@@ -7,13 +7,7 @@ import Link from "next/link";
 import axios from "axios";
 import { toast } from "sonner";
 import { useSelector } from "react-redux";
-import {
-  MapPin,
-  Briefcase,
-  Star,
-  Mail,
-  Phone,
-} from "lucide-react";
+import { MapPin, Briefcase, Mail, Phone } from "lucide-react";
 import { selectCurrentUser } from "@/redux/slice/authSlice";
 
 interface Provider {
@@ -53,9 +47,11 @@ export default function ProviderDetailsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const params = useParams();
@@ -67,7 +63,9 @@ export default function ProviderDetailsPage() {
   useEffect(() => {
     const fetchProvider = async () => {
       try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_BASEURL}/service-providers/${id}`);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASEURL}/service-providers/${id}`
+        );
         setProvider(res.data.data);
       } catch (error) {
         console.error("Failed to fetch provider", error);
@@ -99,11 +97,14 @@ export default function ProviderDetailsPage() {
         providerId: id,
       };
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/contacts/create`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASEURL}/contacts/create`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       const data = await response.json();
 
@@ -124,11 +125,15 @@ export default function ProviderDetailsPage() {
   };
 
   if (loading) {
-    return <div className="text-center py-20 text-gray-500">Loading provider...</div>;
+    return (
+      <div className="text-center py-20 text-gray-500">Loading provider...</div>
+    );
   }
 
   if (!provider) {
-    return <div className="text-center py-20 text-red-500">Provider not found.</div>;
+    return (
+      <div className="text-center py-20 text-red-500">Provider not found.</div>
+    );
   }
 
   const fullName = `${provider.firstName} ${provider.lastName}`;
@@ -140,7 +145,10 @@ export default function ProviderDetailsPage() {
       <header className="bg-gradient-to-r from-indigo-900 to-purple-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="">
-            <Link href="/service-providers" className="text-white hover:text-gray-200">
+            <Link
+              href="/service-providers"
+              className="text-white hover:text-gray-200"
+            >
               ← Back to Service Providers
             </Link>
           </div>
@@ -155,7 +163,9 @@ export default function ProviderDetailsPage() {
               <span className="text-white font-bold text-lg">{initial}</span>
             </div>
             <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{fullName}</h1>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                {fullName}
+              </h1>
               <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">
                 <div className="flex items-center">
                   <MapPin className="w-4 h-4 mr-1" />
@@ -163,20 +173,33 @@ export default function ProviderDetailsPage() {
                 </div>
               </div>
               <p className="text-gray-600">
-                {provider.profession} with {provider.experienceYears}+ years of experience.
+                {provider.profession} with {provider.experienceYears}+ years of
+                experience.
               </p>
             </div>
           </div>
           <div className="mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+              Contact Information
+            </h2>
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 text-gray-600" />
-                <a href={`mailto:${provider.email}`} className="text-blue-600 hover:text-blue-700">{provider.email}</a>
+                <a
+                  href={`mailto:${provider.email}`}
+                  className="text-blue-600 hover:text-blue-700"
+                >
+                  {provider.email}
+                </a>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="w-4 h-4 text-gray-600" />
-                <a href={`tel:${provider.phone}`} className="text-blue-600 hover:text-blue-700">{provider.phone}</a>
+                <a
+                  href={`tel:${provider.phone}`}
+                  className="text-blue-600 hover:text-blue-700"
+                >
+                  {provider.phone}
+                </a>
               </div>
             </div>
           </div>
@@ -188,17 +211,27 @@ export default function ProviderDetailsPage() {
           <div className="lg:col-span-2 space-y-8">
             {/* About Section */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">About {fullName}</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                About {fullName}
+              </h2>
               <p className="text-gray-600">{provider.bio}</p>
             </div>
 
             {/* Profession & Rate */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Profession & Rate</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                Profession & Rate
+              </h2>
               <div className="space-y-2">
-                <p><strong>Profession:</strong> {provider.profession}</p>
-                <p><strong>Experience:</strong> {provider.experienceYears} years</p>
-                <p><strong>Hourly Rate:</strong> ${provider.hourlyRate}</p>
+                <p>
+                  <strong>Profession:</strong> {provider.profession}
+                </p>
+                <p>
+                  <strong>Experience:</strong> {provider.experienceYears} years
+                </p>
+                <p>
+                  <strong>Hourly Rate:</strong> ${provider.hourlyRate}
+                </p>
               </div>
             </div>
           </div>
@@ -207,10 +240,14 @@ export default function ProviderDetailsPage() {
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               {/* Experience */}
               <div className="mb-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">Experience</h2>
+                <h2 className="text-lg font-semibold text-gray-900 mb-4">
+                  Experience
+                </h2>
                 <div className="flex items-center space-x-2">
                   <Briefcase className="w-4 h-4 text-gray-600" />
-                  <span className="text-gray-700">{provider.experienceYears}+ Years</span>
+                  <span className="text-gray-700">
+                    {provider.experienceYears}+ Years
+                  </span>
                 </div>
               </div>
             </div>
@@ -219,7 +256,10 @@ export default function ProviderDetailsPage() {
               className="bg-white mt-6 rounded-lg shadow-sm border border-gray-200 p-6 space-y-4"
             >
               <div>
-                <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="location"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Location *
                 </label>
                 <input
@@ -234,7 +274,10 @@ export default function ProviderDetailsPage() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Message *
                 </label>
                 <textarea

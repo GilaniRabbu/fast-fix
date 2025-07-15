@@ -1,5 +1,4 @@
 import SettingsSidebar from "@/components/dashboard/user/settings/SettingsSidebar";
-import React from "react";
 
 export default function SettingsLayout({
   children,

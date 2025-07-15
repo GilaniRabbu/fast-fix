@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -17,10 +18,11 @@ const Footer = () => {
           <div className="lg:col-span-1 lg:w-4/5">
             <h2 className="text-xl font-semibold mb-4">JustFix</h2>
             <p className="text-sm text-gray-600">
-              JustFix connects you with trusted electricians, plumbers, cleaners, and other local experts. Get reliable help for your home and office needs — quickly and easily.
+              JustFix connects you with trusted electricians, plumbers,
+              cleaners, and other local experts. Get reliable help for your home
+              and office needs — quickly and easily.
             </p>
           </div>
-
 
           {/* Pages */}
           {/* Pages (Updated to match navLinks) */}
@@ -28,27 +30,42 @@ const Footer = () => {
             <h3 className="font-semibold text-gray-900 mb-4">Pages</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-600 hover:text-gray-900 text-sm">
+                <Link
+                  href="/"
+                  className="text-gray-600 hover:text-gray-900 text-sm"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/post-job" className="text-gray-600 hover:text-gray-900 text-sm">
+                <Link
+                  href="/post-job"
+                  className="text-gray-600 hover:text-gray-900 text-sm"
+                >
                   Post A Job
                 </Link>
               </li>
               <li>
-                <Link href="/hire-serivce-provider" className="text-gray-600 hover:text-gray-900 text-sm">
+                <Link
+                  href="/hire-serivce-provider"
+                  className="text-gray-600 hover:text-gray-900 text-sm"
+                >
                   Hire A Service Provider
                 </Link>
               </li>
               <li>
-                <Link href="/signup" className="text-gray-600 hover:text-gray-900 text-sm">
+                <Link
+                  href="/signup"
+                  className="text-gray-600 hover:text-gray-900 text-sm"
+                >
                   Become A Service Provider
                 </Link>
               </li>
               <li>
-                <Link href="/login" className="text-gray-600 hover:text-gray-900 text-sm">
+                <Link
+                  href="/login"
+                  className="text-gray-600 hover:text-gray-900 text-sm"
+                >
                   Login
                 </Link>
               </li>
