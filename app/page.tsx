@@ -9,18 +9,16 @@ import Testimonials from "@/components/home/Testimonials";
 export default function Home() {
   return (
     <>
-      <div className="bg-gradient-to-br from-background to-primary/5">
-        <ContainerWrapper>
-          <Hero />
-        </ContainerWrapper>
-        <Categories />
-        <ServiceProviders />
-        <ContainerWrapper>
-          <HowItWorks />
-        </ContainerWrapper>
+      <ContainerWrapper>
+        <Hero />
+      </ContainerWrapper>
+      <Categories />
+      <ServiceProviders />
+      <ContainerWrapper>
+        <HowItWorks />
         <Testimonials />
         <FAQs />
-      </div>
+      </ContainerWrapper>
     </>
   );
 }

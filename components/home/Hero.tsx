@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Star, Users } from "lucide-react";
-// import Statistics from "./Statistics";
 
 export default function Hero() {
   return (
@@ -11,10 +10,10 @@ export default function Hero() {
           {/* Left Content */}
           <div className="animate-fade-in space-y-8">
             <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl text-[#006AC6] font-bold leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl text-primary font-bold leading-tight">
                 Find Trusted Local Service Providers Near You
               </h1>
-              <p className="text-lg text-muted-foreground max-w-xl">
+              <p className="text-lg max-w-xl">
                 Connect with verified electricians, plumbers, cleaners, and
                 other skilled professionals for any job — quickly and reliably.
               </p>
@@ -24,13 +23,13 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/service-providers"
-                className="text-base cursor-pointer px-4 py-2 border rounded"
+                className="cursor-pointer px-4 py-2 bg-lime text-lime-foreground rounded"
               >
                 Book a Service Now
               </Link>
               <Link
                 href="/"
-                className="text-base cursor-pointer px-4 py-2 border rounded"
+                className="cursor-pointer px-4 py-2 border rounded"
               >
                 Register Yourself
               </Link>
@@ -69,22 +68,7 @@ export default function Hero() {
                 height={360}
                 className="w-full h-auto object-cover rounded-2xl shadow-elegant"
               />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary/20 to-transparent" />
-            </div>
-
-            {/* Floating Card */}
-            <div className="absolute bottom-6 left-6 p-4 rounded-xl border shadow-glow bg-background/95 backdrop-blur">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 border rounded-full flex items-center justify-center">
-                  <span className="text-accent-foreground font-bold">✓</span>
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground">
-                    Service Completed
-                  </p>
-                  <p className="text-sm text-muted-foreground">In 30 minutes</p>
-                </div>
-              </div>
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary/15 to-transparent" />
             </div>
           </div>
         </div>

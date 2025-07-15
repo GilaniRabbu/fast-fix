@@ -24,7 +24,7 @@ export default function FAQs() {
 
   return (
     <section className="py-16">
-      <h2 className="text-3xl font-bold text-center mb-8">
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-primary mb-8">
         Frequently Asked Questions
       </h2>
       <div className="max-w-3xl mx-auto space-y-4">
@@ -32,7 +32,7 @@ export default function FAQs() {
           <div key={i} className="border rounded-2xl overflow-hidden">
             <button
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
-              className="flex justify-between items-center w-full px-6 py-4 text-left"
+              className="cursor-pointer flex justify-between items-center w-full px-6 py-4 text-left"
             >
               <span className="font-medium">{faq.question}</span>
               <ChevronDown
