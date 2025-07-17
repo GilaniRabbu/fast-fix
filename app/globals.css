@@ -70,6 +70,7 @@
   --color-lime-foreground: var(--lime-foreground);
   --color-destructive: var(--destructive);
   --color-border: var(--border);
+  --color-label: var(--label);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-chart-1: var(--chart-1);
@@ -107,6 +108,7 @@
   --lime-foreground: #FFFFFF;
   --destructive: oklch(0.577 0.245 27.325);
   --border: #59BE4C;
+  --label: #008531;
   --input: #94EB73;
   --ring: #94A3B8;
   --chart-1: oklch(0.646 0.222 41.116);
@@ -143,6 +145,7 @@
   --lime-foreground: #121212;
   --destructive: oklch(0.704 0.191 22.216);
   --border: #83F075;
+  --label: #71EE61;
   --input: #59BE4C;
   --ring: #566376;
   --chart-1: oklch(0.488 0.243 264.376);

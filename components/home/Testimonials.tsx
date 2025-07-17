@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import { Button } from "../ui/button";
 
 const testimonials = [
   {
@@ -61,22 +60,12 @@ export default function Testimonials() {
         </AnimatePresence>
       </div>
       <div className="flex justify-center items-center gap-4 mt-10">
-        <Button
-          variant="outline"
-          size="icon"
-          className="cursor-pointer"
-          onClick={prev}
-        >
+        <button className="cursor-pointer border rounded-md p-2" onClick={prev}>
           <ChevronLeft className="w-5 h-5" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          className="cursor-pointer"
-          onClick={next}
-        >
+        </button>
+        <button className="cursor-pointer border rounded-md p-2" onClick={next}>
           <ChevronRight className="w-5 h-5" />
-        </Button>
+        </button>
       </div>
     </section>
   );

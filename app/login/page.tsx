@@ -74,22 +74,17 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
-      <div className="max-w-xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="bg-white rounded-xl shadow-lg p-8">
+    <div className="py-12 md:py-16 lg:py-20">
+      <div className="max-w-xl w-full mx-auto px-4 md:px-6 lg:px-8">
+        <div className="p-8 rounded-xl shadow bg-white dark:bg-slate-800">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Welcome Back
-            </h1>
-            <p className="text-gray-600">Sign in to your account</p>
+            <h1 className="text-3xl font-bold mb-2 text-label">Welcome Back</h1>
+            <p className="text-muted-foreground">Sign in to your account</p>
           </div>
 
           <form className="space-y-6 w-full" onSubmit={handleSubmit}>
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="email" className="block text-sm font-medium">
                 Email Address *
               </label>
               <input
@@ -99,15 +94,12 @@ export default function LoginPage() {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                className="mt-1 block w-full border rounded-md px-3 py-2 outline-none"
               />
             </div>
 
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="password" className="block text-sm font-medium">
                 Password *
               </label>
               <div className="relative mt-1">
@@ -118,17 +110,17 @@ export default function LoginPage() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-400 pr-10"
+                  className="block w-full border rounded-md px-3 py-2 pr-10 outline-none"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
                 >
                   {showPassword ? (
-                    <EyeOff className="h-4 w-4 text-gray-400" />
+                    <EyeOff className="h-4 w-4" />
                   ) : (
-                    <Eye className="h-4 w-4 text-gray-400" />
+                    <Eye className="h-4 w-4" />
                   )}
                 </button>
               </div>
@@ -137,7 +129,7 @@ export default function LoginPage() {
             <div className="flex items-center justify-end">
               <Link
                 href="/forgot-password"
-                className="text-sm text-blue-600 hover:text-blue-700"
+                className="text-sm text-red-600 dark:text-red-400"
               >
                 Forgot password?
               </Link>
@@ -146,24 +138,21 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full cursor-pointer py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 
+              className={`cursor-pointer w-full py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 
                 ${
                   isLoading
-                    ? "bg-gray-400 text-white cursor-not-allowed"
-                    : "bg-gray-900 hover:bg-gray-800 text-white focus:ring-gray-900"
+                    ? "bg-lime text-[#95FE8A] dark:text-[#202020] cursor-not-allowed"
+                    : "bg-lime text-[#71EE61] dark:text-[#121212] focus:ring-ring"
                 }`}
             >
               {isLoading ? "Login..." : "Login"}
             </button>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+          <div className="text-center mt-6">
+            <p className="text-sm">
               Don&apos;t have an account?{" "}
-              <Link
-                href="/signup"
-                className="text-blue-600 hover:text-blue-700 font-medium"
-              >
+              <Link href="/signup" className="font-medium text-label">
                 Sign Up
               </Link>
             </p>
