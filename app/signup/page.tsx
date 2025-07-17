@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, EyeOff, User, Building2 } from "lucide-react";
+import { Eye, EyeOff, User, Building2, Check } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -327,7 +327,7 @@ export default function SignupPage() {
                       required={userType === "SERVICE_PROVIDER"}
                       value={formData.profession}
                       onChange={handleChange}
-                      className="cursor-pointer mt-1 block w-full border rounded-md px-3 py-2 outline-none"
+                      className="cursor-pointer mt-1 block w-full border rounded-md px-3 py-2 outline-none text-foreground/90 bg-white dark:bg-slate-800"
                     >
                       <option value="">Select your profession</option>
                       <option value="Electrician">Electrician</option>
@@ -355,7 +355,7 @@ export default function SignupPage() {
                       required={userType === "SERVICE_PROVIDER"}
                       value={formData.experienceYears}
                       onChange={handleChange}
-                      className="cursor-pointer mt-1 block w-full border rounded-md px-3 py-2 outline-none"
+                      className="cursor-pointer mt-1 block w-full border rounded-md px-3 py-2 outline-none text-foreground/90 bg-white dark:bg-slate-800"
                     >
                       <option value="">Select experience</option>
                       <option value="0">0-1 years</option>
@@ -412,17 +412,20 @@ export default function SignupPage() {
               </div>
             )}
 
-            <div className="flex items-center space-x-2">
+            <label
+              htmlFor="terms"
+              className="flex items-center space-x-2 cursor-pointer"
+            >
               <input
                 type="checkbox"
                 id="terms"
-                className="cursor-pointer h-4 w-4 rounded bg-transparent"
+                className="peer hidden"
                 required
               />
-              <label
-                htmlFor="terms"
-                className="text-sm text-muted-foreground leading-5"
-              >
+              <div className="w-5 h-5 rounded flex items-center justify-center transition-colors border-2 border-label peer-checked:bg-label">
+                <Check className="w-4 h-4 text-white dark:text-slate-800" />
+              </div>
+              <p className="text-sm text-muted-foreground leading-5 cursor-pointer">
                 I agree to the{" "}
                 <Link href="/terms" className="text-label">
                   Terms of Service
@@ -431,8 +434,8 @@ export default function SignupPage() {
                 <Link href="/privacy" className="text-label">
                   Privacy Policy
                 </Link>
-              </label>
-            </div>
+              </p>
+            </label>
 
             <button
               type="submit"
