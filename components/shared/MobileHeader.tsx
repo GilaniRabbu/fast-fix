@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Phone } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const navigationItems = [
   {
@@ -96,6 +97,16 @@ export default function MobileHeader() {
               </div>
             </Link>
           ))}
+        </div>
+      </div>
+      <div className="pt-4 pb-6">
+        <div className="flex flex-col space-y-3">
+          <Button variant="outline" size="sm" className="cursor-pointer">
+            <Link href="/signup">Sign Up</Link>
+          </Button>
+          <Button variant="outline" size="sm" className="cursor-pointer">
+            <Link href="/login">Login</Link>
+          </Button>
         </div>
       </div>
     </div>

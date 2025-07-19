@@ -2,8 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu, Search, Sun, Moon, Phone, X } from "lucide-react";
-
+import { Menu, Search, Sun, Moon, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   CommandDialog,
@@ -13,12 +12,6 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -76,12 +69,6 @@ const navigationItems = [
   },
 ];
 
-const phoneNumbers = [
-  { label: "Main Office", number: "+1 (555) 123-4567" },
-  { label: "Sales", number: "+1 (555) 987-6543" },
-  { label: "Support", number: "+1 (555) 456-7890" },
-];
-
 export default function DesktopHeader() {
   const [open, setOpen] = React.useState(false);
   const [searchOpen, setSearchOpen] = React.useState(false);
@@ -126,12 +113,12 @@ export default function DesktopHeader() {
                                   <NavigationMenuLink asChild>
                                     <Link
                                       href={subItem.href}
-                                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary hover:text-background"
                                     >
                                       <div className="text-sm font-medium leading-none">
                                         {subItem.title}
                                       </div>
-                                      <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                      <p className="line-clamp-2 text-sm leading-snug">
                                         {subItem.description}
                                       </p>
                                     </Link>
@@ -145,7 +132,7 @@ export default function DesktopHeader() {
                         <NavigationMenuLink asChild>
                           <Link
                             href={item.href}
-                            className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                            className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-all data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
                           >
                             {item.title}
                           </Link>
@@ -170,38 +157,6 @@ export default function DesktopHeader() {
               <Search className="h-4 w-4" />
               <span className="sr-only">Search</span>
             </Button>
-
-            {/* Phone Numbers Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-9 w-9 px-0 cursor-pointer hidden md:block"
-                >
-                  <Phone className="h-4 w-4" />
-                  <span className="sr-only">Phone Numbers</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                {phoneNumbers.map((phone) => (
-                  <DropdownMenuItem key={phone.label} asChild>
-                    <a
-                      href={`tel:${phone.number}`}
-                      className="flex items-center"
-                    >
-                      <Phone className="mr-2 h-4 w-4" />
-                      <div>
-                        <div className="font-medium">{phone.label}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {phone.number}
-                        </div>
-                      </div>
-                    </a>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
 
             {/* Theme Toggle */}
             <Button
@@ -249,7 +204,18 @@ export default function DesktopHeader() {
               </SheetContent>
             </Sheet>
 
-            <Button variant="outline" size="sm" className="cursor-pointer">
+            <Button
+              variant="outline"
+              size="sm"
+              className="cursor-pointer hidden md:block"
+            >
+              <Link href="/signup">Sign Up</Link>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="cursor-pointer hidden md:block"
+            >
               <Link href="/login">Login</Link>
             </Button>
           </div>
