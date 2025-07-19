@@ -20,7 +20,7 @@ export default function Hero() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 text-center">
               <Link
                 href="/service-providers"
                 className="cursor-pointer px-4 py-2 bg-lime text-lime-foreground rounded"
