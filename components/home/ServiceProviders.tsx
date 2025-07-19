@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import { MapPin } from "lucide-react";
-import ContainerWrapper from "../common/ContainerWrapper";
+import ContainerWrapper from "@/components/common/ContainerWrapper";
 import axios from "axios";
 import Link from "next/link";
 
@@ -58,15 +58,15 @@ const ServiceProviders = () => {
   }
 
   return (
-    <div className="py-16 w-full bg-gray-50">
+    <div className="w-full py-16">
       <ContainerWrapper>
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+          <h2 className="text-3xl font-bold text-primary">
             Explore Popular Service Providers
           </h2>
           <Link
             href="/service-providers"
-            className="border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-50 transition"
+            className="border text-primary px-4 py-2 rounded"
           >
             View All Providers
           </Link>
@@ -76,30 +76,27 @@ const ServiceProviders = () => {
           {providers.map((provider) => {
             const fullName = `${provider.firstName} ${provider.lastName}`;
             return (
-              <div
-                key={provider._id}
-                className="bg-white rounded-lg shadow-sm border border-gray-100 p-5 hover:shadow-md transition-shadow"
-              >
+              <div key={provider._id} className="border rounded-md p-5">
                 <div className="flex justify-between items-start">
                   {/* First character of firstName */}
-                  <div className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-white font-bold text-sm">
+                  <div className="w-10 h-10 rounded-full text-sm font-bold text-primary border flex items-center justify-center">
                     {provider.firstName.charAt(0)}
                   </div>
                 </div>
 
                 {/* Name */}
                 <div className="mt-3">
-                  <h3 className="font-medium text-gray-900">{fullName}</h3>
+                  <h3 className="font-medium">{fullName}</h3>
                 </div>
 
                 {/* Profession */}
-                <h2 className="text-xl font-bold text-gray-900 mt-1">
+                <h2 className="text-xl font-bold mt-1 text-lime">
                   {provider.profession}
                 </h2>
 
                 {/* Experience */}
                 <div className="mt-3">
-                  <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm">
+                  <span className="px-2 py-1 rounded text-sm border text-primary">
                     {provider.experienceYears}+ years experience
                   </span>
                 </div>
@@ -107,10 +104,8 @@ const ServiceProviders = () => {
                 {/* Rate & Location */}
                 <div className="mt-4 flex justify-between items-end">
                   <div>
-                    <div className="text-gray-900 font-bold">
-                      ${provider.hourlyRate}/hr
-                    </div>
-                    <div className="text-gray-500 text-sm flex items-center gap-1">
+                    <div className="font-bold">${provider.hourlyRate}/hr</div>
+                    <div className="text-sm text-muted-foreground flex items-center gap-1">
                       <MapPin className="w-4 h-4" /> {provider.location}
                     </div>
                   </div>
@@ -118,7 +113,7 @@ const ServiceProviders = () => {
                   {/* Hire */}
                   <Link
                     href={`/service-providers/${provider._id}`}
-                    className="bg-black hover:bg-gray-800 text-white rounded-md px-4 py-2"
+                    className="px-4 py-2 rounded-md transition-all bg-slate-300 dark:bg-slate-700 hover:bg-slate-400 hover:dark:bg-slate-800"
                   >
                     Contact Provider
                   </Link>
