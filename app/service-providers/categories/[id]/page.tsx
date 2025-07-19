@@ -43,9 +43,9 @@ export default function ServiceProvidersPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-gradient-to-r from-indigo-900 to-purple-900 text-white">
+      <header className="bg-lime text-white dark:text-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="text-4xl font-bold text-center">
             Find Top Service Providers
@@ -54,62 +54,53 @@ export default function ServiceProvidersPage() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="">
-          {/* Filters Sidebar */}
-
+        <div>
           {/* Main Content */}
-          <div className="">
+          <div>
             {/* Results Header */}
-            <div className="flex items-center justify-between mb-6">
-              <p className="text-gray-600">
+            <div className="mb-6">
+              <p className="text-muted-foreground">
                 {providers.length} service providers found
               </p>
             </div>
-
-            {/* Service Provider Listings */}
 
             <div className="space-y-4">
               {providers.map((provider) => (
                 <div
                   key={provider._id}
-                  className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow flex flex-col justify-between h-full"
+                  className="p-6 rounded-lg shadow-sm bg-lime text-white dark:text-slate-800 flex flex-col justify-between"
                 >
                   <div className="flex justify-between items-start">
                     {/* Left: Initial & Provider Info */}
-                    <div className="flex space-x-4">
-                      <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                        <span className="text-white font-bold text-sm">
+                    <div>
+                      <div className="w-12 h-12 rounded-lg mb-4 bg-white dark:bg-slate-800 flex items-center justify-center">
+                        <span className="font-bold text-lg text-slate-800 dark:text-white">
                           {provider.firstName[0]}
                         </span>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                        <h3 className="text-lg font-semibold mb-1">
                           {provider.firstName} {provider.lastName}
                         </h3>
-                        <p className="text-gray-600 mb-3">
-                          {provider.location}
-                        </p>
-
+                        <p className="mb-3">{provider.location}</p>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                           <div>
-                            <span className="text-gray-500">Profession</span>
+                            <strong>Profession</strong>
                             <p className="font-medium">{provider.profession}</p>
                           </div>
                           <div>
-                            <span className="text-gray-500">Experience</span>
+                            <strong>Experience</strong>
                             <p className="font-medium">
                               {provider.experienceYears}
                             </p>
                           </div>
                         </div>
-                        <p className="text-gray-500 text-sm mt-4">
-                          {provider.bio}
-                        </p>
+                        <p className="text-sm mt-4">{provider.bio}</p>
                       </div>
                     </div>
 
                     {/* Save Button */}
-                    <button className="text-gray-400 flex hover:text-gray-600 w-auto justify-center items-center">
+                    <button className="flex w-auto cursor-pointer justify-center items-center opacity-75">
                       Save
                       <Bookmark className="w-4 h-4 ml-1" />
                     </button>
@@ -119,7 +110,7 @@ export default function ServiceProvidersPage() {
                   <div className="mt-6 flex justify-end">
                     <Link
                       href={`/service-providers/${provider._id}`}
-                      className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      className="px-4 py-2 rounded-md bg-slate-800 dark:bg-slate-300"
                     >
                       Contact Provider
                     </Link>
@@ -130,7 +121,7 @@ export default function ServiceProvidersPage() {
 
             {/* Load More */}
             <div className="text-center mt-8">
-              <button className="border border-gray-300 bg-white text-gray-700 py-2 px-8 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+              <button className="border cursor-pointer px-8 py-2 rounded-md">
                 Load More Providers
               </button>
             </div>
