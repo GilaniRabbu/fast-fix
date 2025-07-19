@@ -13,19 +13,24 @@ const navigationItems = [
     href: "/services",
     items: [
       {
-        title: "Web Development",
-        href: "/services/web-development",
-        description: "Custom web applications and websites",
+        title: "Electrical Services",
+        href: "/services/electrical",
+        description: "Wiring, repair, and maintenance",
       },
       {
-        title: "Mobile Apps",
-        href: "/services/mobile-apps",
-        description: "iOS and Android app development",
+        title: "Plumbing Services",
+        href: "/services/plumbing",
+        description: "Pipe fitting and leak repair",
       },
       {
-        title: "Consulting",
-        href: "/services/consulting",
-        description: "Technical consulting and strategy",
+        title: "Cleaning Services",
+        href: "/services/cleaning",
+        description: "Home and office cleaning",
+      },
+      {
+        title: "AC & Refrigeration Services",
+        href: "/services/ac-refrigeration",
+        description: "AC and fridge installation & repair",
       },
     ],
   },
@@ -36,12 +41,12 @@ const navigationItems = [
       {
         title: "Hire A Service Provider",
         href: "/service-providers",
-        description: "Custom web applications and websites",
+        description: "Find and connect with verified professionals",
       },
       {
         title: "Become A Service Provider",
         href: "/signup",
-        description: "iOS and Android app development",
+        description: "Join our platform and offer your services",
       },
     ],
   },

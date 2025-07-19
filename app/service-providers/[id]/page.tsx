@@ -140,66 +140,64 @@ export default function ProviderDetailsPage() {
   const initial = provider.firstName.charAt(0);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-gradient-to-r from-indigo-900 to-purple-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <header className="bg-lime text-white dark:text-slate-800">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-8">
           <div className="">
-            <Link
-              href="/service-providers"
-              className="text-white hover:text-gray-200"
-            >
+            <Link href="/service-providers" className="text-lg md:tex-sm">
               ← Back to Service Providers
             </Link>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-12">
         {/* Provider Overview */}
-        <div className="flex justify-between bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-8">
+        <div className="flex justify-between flex-col lg:flex-row rounded-lg shadow-sm p-8 mb-8 bg-lime text-white dark:text-slate-800">
           <div className="flex items-start space-x-6">
-            <div className="w-16 h-16 bg-black rounded-lg flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-bold text-lg">{initial}</span>
+            <div className="w-16 h-16 rounded-lg bg-white dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+              <span className="font-bold text-lg text-slate-800 dark:text-white">
+                {initial}
+              </span>
             </div>
             <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                {fullName}
-              </h1>
-              <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">
-                <div className="flex items-center">
-                  <MapPin className="w-4 h-4 mr-1" />
-                  {provider.location}
-                </div>
+              <h1 className="text-3xl font-bold mb-2">{fullName}</h1>
+              <div className="flex items-center space-x-4 text-sm mb-4">
+                <MapPin className="w-4 h-4 mr-1" />
+                {provider.location}
               </div>
-              <p className="text-gray-600">
+              <p className="text-sm md:text-lg">
                 {provider.profession} with {provider.experienceYears}+ years of
                 experience.
               </p>
+              <div className="block lg:hidden mt-4">
+                <h2 className="text-lg font-semibold mb-2">
+                  Contact Information
+                </h2>
+                <div className="space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <Mail className="w-4 h-4" />
+                    <a href={`mailto:${provider.email}`}>{provider.email}</a>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Phone className="w-4 h-4" />
+                    <a href={`tel:${provider.phone}`}>{provider.phone}</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">
-              Contact Information
-            </h2>
+          <div className="hidden lg:block">
+            <h2 className="text-lg font-semibold mb-4">Contact Information</h2>
             <div className="space-y-3">
               <div className="flex items-center space-x-2">
-                <Mail className="w-4 h-4 text-gray-600" />
-                <a
-                  href={`mailto:${provider.email}`}
-                  className="text-blue-600 hover:text-blue-700"
-                >
-                  {provider.email}
-                </a>
+                <Mail className="w-4 h-4" />
+                <a href={`mailto:${provider.email}`}>{provider.email}</a>
               </div>
               <div className="flex items-center space-x-2">
-                <Phone className="w-4 h-4 text-gray-600" />
-                <a
-                  href={`tel:${provider.phone}`}
-                  className="text-blue-600 hover:text-blue-700"
-                >
-                  {provider.phone}
-                </a>
+                <Phone className="w-4 h-4" />
+                <a href={`tel:${provider.phone}`}>{provider.phone}</a>
               </div>
             </div>
           </div>
@@ -210,18 +208,14 @@ export default function ProviderDetailsPage() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* About Section */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                About {fullName}
-              </h2>
-              <p className="text-gray-600">{provider.bio}</p>
+            <div className="p-8 rounded-lg shadow-sm bg-lime text-white dark:text-slate-800">
+              <h2 className="text-xl font-semibold mb-4">About {fullName}</h2>
+              <p>{provider.bio}</p>
             </div>
 
             {/* Profession & Rate */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                Profession & Rate
-              </h2>
+            <div className="p-8 rounded-lg shadow-sm bg-lime text-white dark:text-slate-800">
+              <h2 className="text-xl font-semibold mb-4">Profession & Rate</h2>
               <div className="space-y-2">
                 <p>
                   <strong>Profession:</strong> {provider.profession}
@@ -237,29 +231,22 @@ export default function ProviderDetailsPage() {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div className="p-6 rounded-lg shadow-sm bg-lime text-white dark:text-slate-800">
               {/* Experience */}
               <div className="mb-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">
-                  Experience
-                </h2>
+                <h2 className="text-lg font-semibold mb-4">Experience</h2>
                 <div className="flex items-center space-x-2">
-                  <Briefcase className="w-4 h-4 text-gray-600" />
-                  <span className="text-gray-700">
-                    {provider.experienceYears}+ Years
-                  </span>
+                  <Briefcase className="w-4 h-4" />
+                  <span>{provider.experienceYears}+ Years</span>
                 </div>
               </div>
             </div>
             <form
               onSubmit={handleSubmit}
-              className="bg-white mt-6 rounded-lg shadow-sm border border-gray-200 p-6 space-y-4"
+              className="p-6 mt-8 rounded-lg shadow-sm space-y-4 bg-lime text-white dark:text-slate-800"
             >
               <div>
-                <label
-                  htmlFor="location"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="location" className="block text-sm font-medium">
                   Location *
                 </label>
                 <input
@@ -269,15 +256,11 @@ export default function ProviderDetailsPage() {
                   required
                   value={formData.location}
                   onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="mt-1 block w-full border dark:border-slate-800 rounded-md px-3 py-2 outline-none"
                 />
               </div>
-
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="message" className="block text-sm font-medium">
                   Message *
                 </label>
                 <textarea
@@ -287,14 +270,13 @@ export default function ProviderDetailsPage() {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="mt-1 block w-full border dark:border-slate-800 rounded-md px-3 py-2 outline-none"
                 />
               </div>
-
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="w-full cursor-pointer px-4 py-3 rounded-md bg-slate-800 dark:bg-slate-300 disabled:cursor-not-allowed"
               >
                 {isLoading ? "Sending..." : "Contact Provider"}
               </button>

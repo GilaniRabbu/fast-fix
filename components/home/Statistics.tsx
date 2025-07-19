@@ -18,7 +18,9 @@ const Statistics = () => {
   useEffect(() => {
     const fetchStatistics = async () => {
       try {
-       const res = await axios.get(`${process.env.NEXT_PUBLIC_BASEURL}/users/statistics`);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASEURL}/users/statistics`
+        );
 
         setData(res.data.data);
       } catch (error) {
@@ -32,11 +34,17 @@ const Statistics = () => {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-6 text-gray-600">Loading statistics...</div>;
+    return (
+      <div className="text-center py-6 text-gray-600">
+        Loading statistics...
+      </div>
+    );
   }
 
   if (!data) {
-    return <div className="text-center py-6 text-red-500">Failed to load data.</div>;
+    return (
+      <div className="text-center py-6 text-red-500">Failed to load data.</div>
+    );
   }
 
   const stats = [
@@ -44,40 +52,37 @@ const Statistics = () => {
       id: 1,
       label: "Service Categories",
       value: data.totalCategories,
-      icon: <Layers className="w-6 h-6 text-gray-600" />,
-      bg: "bg-gray-100",
+      icon: <Layers className="w-6 h-6 text-primary" />,
+      bg: "bg-green-100 dark:bg-slate-700",
     },
     {
       id: 2,
       label: "Active Providers",
       value: data.totalServiceProviders,
-      icon: <Users className="w-6 h-6 text-gray-600" />,
-      bg: "bg-blue-100",
+      icon: <Users className="w-6 h-6 text-primary" />,
+      bg: "bg-green-100 dark:bg-slate-700",
     },
     {
       id: 3,
       label: "Total Customers",
       value: data.totalCustomers,
-      icon: <Briefcase className="w-6 h-6 text-gray-600" />,
-      bg: "bg-gray-100",
+      icon: <Briefcase className="w-6 h-6 text-primary" />,
+      bg: "bg-green-100 dark:bg-slate-700",
     },
     {
       id: 4,
       label: "Locations Covered",
       value: data.totalLocations,
-      icon: <MapPin className="w-6 h-6 text-gray-600" />,
-      bg: "bg-gray-100",
+      icon: <MapPin className="w-6 h-6 text-primary" />,
+      bg: "bg-green-100 dark:bg-slate-700",
     },
   ];
 
   return (
-    <div className="w-full">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+    <div className="py-10 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((item) => (
-          <div
-            key={item.id}
-            className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
-          >
+          <div key={item.id} className="rounded-xl p-6 border">
             <div className="flex items-center space-x-4">
               <div
                 className={`w-12 h-12 ${item.bg} rounded-lg flex items-center justify-center flex-shrink-0`}
@@ -85,8 +90,10 @@ const Statistics = () => {
                 {item.icon}
               </div>
               <div className="min-w-0">
-                <div className="text-2xl font-bold text-gray-900">{item.value}</div>
-                <div className="text-sm text-gray-500">{item.label}</div>
+                <div className="text-2xl font-bold">{item.value}</div>
+                <div className="text-sm text-muted-foreground">
+                  {item.label}
+                </div>
               </div>
             </div>
           </div>
