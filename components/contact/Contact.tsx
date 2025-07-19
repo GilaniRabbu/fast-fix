@@ -1,10 +1,8 @@
 "use client";
 
-import type React from "react";
-
 import { useState } from "react";
 import { Send, MapPin, Phone, Mail, Clock } from "lucide-react";
-import Logo from "../shared/Logo";
+import Logo from "@/components/shared/Logo";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -36,10 +34,10 @@ export default function ContactUs() {
   };
 
   return (
-    <section className="py-10 bg-white">
-      <div className="grid grid-cols-1 lg:grid-cols-2 ">
+    <section className="py-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* Left Side - Dark Background with Image */}
-        <div className="relative  bg-gradient-to-br rounded-lg from-gray-900 via-gray-800 to-black p-8  flex flex-col justify-between">
+        <div className="relative bg-gradient-to-br rounded-lg from-gray-900 via-gray-800 to-black p-8  flex flex-col justify-between">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-20 left-20 w-32 h-32  border-white/20 rounded-lg transform rotate-12"></div>
