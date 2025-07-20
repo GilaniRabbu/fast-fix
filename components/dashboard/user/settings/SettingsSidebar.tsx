@@ -15,7 +15,7 @@ const SettingsSidebar = () => {
 
   return (
     <div className="w-full">
-      <div className="bg-white rounded-sm border border-gray-200  px-2 py-2">
+      <div className="px-2 py-2 rounded-sm border border-gray-200 bg-white">
         <nav className="flex gap-4">
           {tabs.map((tab) => {
             const Icon = tab.icon;
@@ -25,9 +25,9 @@ const SettingsSidebar = () => {
               <Link
                 href={`/user/settings/${tab.id}`}
                 key={tab.id}
-                className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                   isActive
-                    ? "bg-red-50 text-red-600 border border-red-200"
+                    ? "border border-red-200 text-red-600 bg-red-50"
                     : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                 }`}
               >

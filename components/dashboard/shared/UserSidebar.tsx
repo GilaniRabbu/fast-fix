@@ -41,7 +41,7 @@ export default function UserSidebar() {
       <div className="lg:hidden fixed top-4 left-4 z-50">
         <button
           onClick={toggleMobileMenu}
-          className="p-2 bg-white rounded-lg border border-gray-200"
+          className="p-2 rounded-lg border border-gray-200 bg-white"
         >
           {isMobileMenuOpen ? (
             <X className="w-6 h-6" />
@@ -61,13 +61,13 @@ export default function UserSidebar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed lg:sticky lg:top-0 inset-y-0 min-h-screen left-0 z-50 w-52 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed lg:sticky lg:top-0 inset-y-0 left-0 z-50 w-52 min-h-screen bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out ${
           isMobileMenuOpen
             ? "translate-x-0"
             : "-translate-x-full lg:translate-x-0"
         }`}
       >
-        <div className="flex flex-col min-h-screen justify-between">
+        <div className="flex flex-col justify-between min-h-screen">
           {/* Header */}
           <div className="px-6 py-4 border-gray-200">
             <Logo />
