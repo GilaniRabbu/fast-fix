@@ -140,9 +140,9 @@ export default function ServiceProvidersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-gradient-to-r from-indigo-900 to-purple-900 text-white">
+      <header className="shadow bg-white dark:bg-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="text-4xl font-bold text-center">
             Find Top Service Providers
@@ -154,12 +154,12 @@ export default function ServiceProvidersPage() {
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Filters Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm p-6 sticky top-8">
+            <div className="p-6 rounded-lg shadow-sm sticky top-8 bg-white dark:bg-slate-800">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
+                <h2 className="text-lg font-semibold">Filters</h2>
                 <button
                   onClick={clearFilters}
-                  className="text-blue-600 text-sm hover:text-blue-700"
+                  className="cursor-pointer text-sm text-blue-600 dark:text-blue-300"
                 >
                   Clear All
                 </button>
@@ -168,10 +168,10 @@ export default function ServiceProvidersPage() {
               {/* Service Type Filter */}
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-medium text-gray-900">Service Type</h3>
+                  <h3 className="font-medium">Service Type</h3>
                   <button
                     onClick={() => handleCategoryChange("")}
-                    className="text-blue-600 text-xs hover:text-blue-700"
+                    className="cursor-pointer text-xs text-blue-600 dark:text-blue-300"
                   >
                     Clear
                   </button>
@@ -187,11 +187,11 @@ export default function ServiceProvidersPage() {
                         id={category.name}
                         checked={filters.profession === category.name}
                         onChange={() => handleCategoryChange(category.name)}
-                        className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        className="cursor-pointer h-4 w-4"
                       />
                       <label
                         htmlFor={category.name}
-                        className="text-sm text-gray-700"
+                        className="cursor-pointer text-sm"
                       >
                         {category.name} ({category.total})
                       </label>
@@ -203,12 +203,12 @@ export default function ServiceProvidersPage() {
               {/* Location Filter */}
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-medium text-gray-900">Location</h3>
+                  <h3 className="font-medium">Location</h3>
                   <button
                     onClick={() =>
                       setFilters((prev) => ({ ...prev, location: "" }))
                     }
-                    className="text-blue-600 text-xs hover:text-blue-700"
+                    className="cursor-pointer text-xs text-blue-600 dark:text-blue-300"
                   >
                     Clear
                   </button>
@@ -219,21 +219,19 @@ export default function ServiceProvidersPage() {
                   value={filters.location}
                   onChange={handleFilterChange}
                   placeholder="Enter city or state"
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full rounded-md px-3 py-2 outline-none border border-blue-600 dark:border-blue-300"
                 />
               </div>
 
               {/* Experience Filter */}
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-medium text-gray-900">
-                    Years of Experience
-                  </h3>
+                  <h3 className="font-medium">Years of Experience</h3>
                   <button
                     onClick={() =>
                       setFilters((prev) => ({ ...prev, experienceYears: "" }))
                     }
-                    className="text-blue-600 text-xs hover:text-blue-700"
+                    className="cursor-pointer text-xs text-blue-600 dark:text-blue-300"
                   >
                     Clear
                   </button>
@@ -242,7 +240,7 @@ export default function ServiceProvidersPage() {
                   name="experienceYears"
                   value={filters.experienceYears}
                   onChange={handleFilterChange}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full cursor-pointer rounded-md px-3 py-2 border border-blue-600 dark:border-blue-300 bg-white dark:bg-slate-800"
                 >
                   <option value="">All Experience Levels</option>
                   <option value="0">0-2 Years</option>
@@ -258,7 +256,7 @@ export default function ServiceProvidersPage() {
           <div className="lg:col-span-3">
             {/* Results Header */}
             <div className="flex items-center justify-between mb-6">
-              <p className="text-gray-600">
+              <p className="text-muted-foreground">
                 {filterLoading
                   ? "Loading..."
                   : `${providers.length} service providers found`}
@@ -267,11 +265,11 @@ export default function ServiceProvidersPage() {
 
             {/* Service Provider Listings */}
             {loading ? (
-              <div className="text-center py-20 text-gray-500">
+              <div className="text-center py-20 text-muted-foreground">
                 Loading providers...
               </div>
             ) : providers.length === 0 ? (
-              <div className="text-center py-20 text-gray-500">
+              <div className="text-center py-20 text-muted-foreground">
                 No providers found
               </div>
             ) : (
@@ -279,38 +277,38 @@ export default function ServiceProvidersPage() {
                 {providers.map((provider) => (
                   <div
                     key={provider._id}
-                    className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow flex flex-col justify-between h-full"
+                    className="p-6 rounded-lg shadow-sm bg-white dark:bg-slate-800 flex flex-col justify-between"
                   >
                     <div className="flex justify-between items-start">
                       {/* Left: Initial & Provider Info */}
-                      <div className="flex space-x-4">
-                        <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                          <span className="text-white font-bold text-sm">
+                      <div className="flex gap-4 flex-col md:flex-row">
+                        <div className="w-12 h-12 rounded-lg bg-slate-800 dark:bg-white flex items-center justify-center">
+                          <span className="text-sm font-bold text-white dark:text-slate-800">
                             {provider.firstName[0]}
                           </span>
                         </div>
                         <div>
-                          <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                          <h3 className="text-lg font-semibold mb-1">
                             {provider.firstName} {provider.lastName}
                           </h3>
-                          <p className="text-gray-600 mb-3">
+                          <p className="mb-3 text-muted-foreground">
                             {provider.location}
                           </p>
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                             <div>
-                              <span className="text-gray-500">Profession</span>
-                              <p className="font-medium">
+                              <span>Profession</span>
+                              <p className="font-medium text-muted-foreground">
                                 {provider.profession}
                               </p>
                             </div>
                             <div>
-                              <span className="text-gray-500">Experience</span>
-                              <p className="font-medium">
+                              <span>Experience</span>
+                              <p className="font-medium text-muted-foreground">
                                 {provider.experienceYears} years
                               </p>
                             </div>
                           </div>
-                          <p className="text-gray-500 text-sm mt-4">
+                          <p className="text-sm mt-4 text-muted-foreground">
                             {provider.bio}
                           </p>
                         </div>
@@ -321,7 +319,7 @@ export default function ServiceProvidersPage() {
                     <div className="mt-6 flex justify-end">
                       <Link
                         href={`/service-providers/${provider._id}`}
-                        className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        className="px-4 py-2 rounded-md bg-slate-300 dark:bg-slate-700"
                       >
                         Contact Provider
                       </Link>
@@ -334,7 +332,7 @@ export default function ServiceProvidersPage() {
             {/* Load More */}
             <div className="text-center mt-8">
               <button
-                className="border border-gray-300 bg-white text-gray-700 py-2 px-8 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="cursor-pointer px-8 py-2 rounded-md border border-blue-600 dark:border-blue-300"
                 disabled={filterLoading}
               >
                 Load More Providers
