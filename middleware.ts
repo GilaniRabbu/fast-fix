@@ -17,6 +17,7 @@ export function middleware(request: NextRequest) {
     url.pathname = "/user/settings/profile";
     return NextResponse.redirect(url);
   }
+
   // Redirect /user to /user/dashboard
   if (pathname === "/admin") {
     const url = request.nextUrl.clone();

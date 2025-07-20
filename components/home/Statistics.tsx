@@ -79,7 +79,11 @@ const Statistics = () => {
   ];
 
   return (
-    <div className="py-10 w-full">
+    <div className="w-full py-10">
+      <h2 className="text-2xl font-bold text-primary mb-8 pt-8">
+        FastFix Statistics
+      </h2>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((item) => (
           <div key={item.id} className="rounded-xl p-6 border">

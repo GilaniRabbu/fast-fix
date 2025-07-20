@@ -212,14 +212,14 @@ export default function DesktopHeader() {
             <Button
               variant="outline"
               size="sm"
-              className="cursor-pointer hidden md:block"
+              className="cursor-pointer hidden md:block bg-transparent dark:bg-transparent"
             >
               <Link href="/signup">Sign Up</Link>
             </Button>
             <Button
               variant="outline"
               size="sm"
-              className="cursor-pointer hidden md:block"
+              className="cursor-pointer hidden md:block bg-transparent dark:bg-transparent"
             >
               <Link href="/login">Login</Link>
             </Button>

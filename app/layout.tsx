@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import ReduxProvider from "@/redux/ReduxProvider";
 import { ThemeProvider } from "@/components/shared/ThemeProvider";
 import Header from "@/components/shared/Header";
+import Footer from "@/components/shared/Footer";
 import "./globals.css";
 
 const inter = Inter({
@@ -34,6 +35,7 @@ export default function RootLayout({
           >
             <Header />
             {children}
+            <Footer />
             <Toaster />
           </ThemeProvider>
         </ReduxProvider>

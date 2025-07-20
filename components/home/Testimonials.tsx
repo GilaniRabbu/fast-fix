@@ -49,11 +49,11 @@ export default function Testimonials() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
-            className="p-8 text-center rounded-2xl relative border italic"
+            className="px-8 py-14 text-center rounded-2xl relative border italic"
           >
-            <Quote className="absolute top-4 left-4 w-8 h-8 rotate-180" />
-            <Quote className="absolute bottom-4 right-4 w-8 h-8" />
-            <p className="mb-4 max-w-xl mx-auto">{`"${current.quote}"`}</p>
+            <Quote className="absolute top-4 left-4 w-8 h-8 rotate-180 opacity-50" />
+            <Quote className="absolute bottom-4 right-4 w-8 h-8 opacity-50" />
+            <p className="mb-4 max-w-xl mx-auto text-balance">{`"${current.quote}"`}</p>
             <h4 className="text-lg font-semibold">{current.name}</h4>
             <p className="font-medium">{current.title}</p>
           </motion.div>

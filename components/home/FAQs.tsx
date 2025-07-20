@@ -17,6 +17,16 @@ const faqs = [
     question: "How can I book an appointment?",
     answer: "You can call us directly or use our online booking form below.",
   },
+  {
+    question: "Are your service providers verified?",
+    answer:
+      "Yes, all our professionals go through a strict background check and verification process.",
+  },
+  {
+    question: "Can I reschedule or cancel my booking?",
+    answer:
+      "Absolutely! You can reschedule or cancel through your dashboard or by contacting our support team.",
+  },
 ];
 
 export default function FAQs() {

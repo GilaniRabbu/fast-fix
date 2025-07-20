@@ -12,12 +12,12 @@ export default function Home() {
     <>
       <ContainerWrapper>
         <Hero />
-        <Statistics />
       </ContainerWrapper>
       <Categories />
       <ServiceProviders />
       <ContainerWrapper>
         <HowItWorks />
+        <Statistics />
         <Testimonials />
         <FAQs />
       </ContainerWrapper>
