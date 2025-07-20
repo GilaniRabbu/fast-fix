@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Phone } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -10,26 +9,26 @@ const navigationItems = [
   },
   {
     title: "Services",
-    href: "/services",
+    href: "/service-providers",
     items: [
       {
         title: "Electrical Services",
-        href: "/services/electrical",
+        href: "/service-providers",
         description: "Wiring, repair, and maintenance",
       },
       {
         title: "Plumbing Services",
-        href: "/services/plumbing",
+        href: "/service-providers",
         description: "Pipe fitting and leak repair",
       },
       {
         title: "Cleaning Services",
-        href: "/services/cleaning",
+        href: "/service-providers",
         description: "Home and office cleaning",
       },
       {
         title: "AC & Refrigeration Services",
-        href: "/services/ac-refrigeration",
+        href: "/service-providers",
         description: "AC and fridge installation & repair",
       },
     ],
@@ -52,13 +51,11 @@ const navigationItems = [
   },
 ];
 
-const phoneNumbers = [
-  { label: "Main Office", number: "+1 (555) 123-4567" },
-  { label: "Sales", number: "+1 (555) 987-6543" },
-  { label: "Support", number: "+1 (555) 456-7890" },
-];
+interface MobileHeaderProps {
+  closeSidebar: () => void;
+}
 
-export default function MobileHeader() {
+export default function MobileHeader({ closeSidebar }: MobileHeaderProps) {
   return (
     <div className="flex flex-col space-y-3">
       <div className="flex flex-col space-y-2 pb-3">
@@ -66,6 +63,7 @@ export default function MobileHeader() {
           <div key={item.title}>
             <Link
               href={item.href}
+              onClick={closeSidebar}
               className="block text-lg font-medium hover:text-foreground/80"
             >
               {item.title}
@@ -76,6 +74,7 @@ export default function MobileHeader() {
                   <Link
                     key={subItem.title}
                     href={subItem.href}
+                    onClick={closeSidebar}
                     className="block text-sm text-muted-foreground hover:text-foreground"
                   >
                     - {subItem.title}
@@ -86,30 +85,22 @@ export default function MobileHeader() {
           </div>
         ))}
       </div>
-      <div className="border-t pt-4">
-        <div className="space-y-2">
-          <h4 className="font-medium text-lg">Contact Numbers</h4>
-          {phoneNumbers.map((phone) => (
-            <Link
-              key={phone.label}
-              href={`tel:${phone.number}`}
-              className="flex items-center gap-3 text-sm mb-3"
-            >
-              <Phone className="h-5 w-5" />
-              <div>
-                <div className="font-medium">{phone.label}</div>
-                <div className="text-muted-foreground">{phone.number}</div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
       <div className="pt-4 pb-6">
         <div className="flex flex-col space-y-3">
-          <Button variant="outline" size="sm" className="cursor-pointer">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={closeSidebar}
+            className="cursor-pointer bg-transparent dark:bg-transparent"
+          >
             <Link href="/signup">Sign Up</Link>
           </Button>
-          <Button variant="outline" size="sm" className="cursor-pointer">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={closeSidebar}
+            className="cursor-pointer bg-transparent dark:bg-transparent"
+          >
             <Link href="/login">Login</Link>
           </Button>
         </div>

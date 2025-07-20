@@ -17,7 +17,6 @@ export default function UserSidebar() {
       icon: LayoutDashboard,
       href: "/user/dashboard",
     },
-
     {
       id: "settings",
       label: "Settings",

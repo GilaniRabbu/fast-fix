@@ -28,7 +28,7 @@ export default function Hero() {
                 Book a Service Now
               </Link>
               <Link
-                href="/"
+                href="/signup"
                 className="cursor-pointer px-4 py-2 border rounded"
               >
                 Register Yourself

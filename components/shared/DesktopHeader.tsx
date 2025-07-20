@@ -192,11 +192,11 @@ export default function DesktopHeader() {
                 className="pr-0 [&>button]:hidden overflow-y-auto"
               >
                 <div className="flex items-center justify-between p-4 border-b">
-                  <Logo />
+                  <Logo onClick={() => setOpen(false)} />
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-9 w-9 p-0 cursor-pointer rounded"
+                    className="h-9 w-9 p-0 cursor-pointer rounded bg-transparent dark:bg-transparent"
                     onClick={() => setOpen(false)}
                   >
                     <X className="h-4 w-4" />
@@ -204,7 +204,7 @@ export default function DesktopHeader() {
                   </Button>
                 </div>
                 <div className="px-4 py-2">
-                  <MobileHeader />
+                  <MobileHeader closeSidebar={() => setOpen(false)} />
                 </div>
               </SheetContent>
             </Sheet>
