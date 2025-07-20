@@ -69,7 +69,7 @@ export default function UserSidebar() {
         <div className="flex flex-col justify-between min-h-screen">
           {/* Header */}
           <div className="px-6 py-4 border-gray-200">
-            <Logo />
+            <Logo onClick={() => setIsMobileMenuOpen(false)} />
           </div>
 
           {/* Navigation */}
@@ -83,7 +83,10 @@ export default function UserSidebar() {
                   <li key={item.id}>
                     <Link
                       href={item.href}
-                      onClick={() => setActiveSection(item.id)}
+                      onClick={() => {
+                        setActiveSection(item.id);
+                        setIsMobileMenuOpen(false); // Auto-close sidebar on mobile
+                      }}
                       className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-sm text-left transition-colors duration-200 ${
                         isActive
                           ? "bg-gradient-to-r from-pink-400 to-purple-500 text-white"
