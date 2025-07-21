@@ -2,7 +2,17 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Menu, Search, Sun, Moon, X } from "lucide-react";
+import {
+  Menu,
+  Search,
+  Sun,
+  Moon,
+  X,
+  LogOut,
+  Settings,
+  LayoutDashboard,
+  User,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   CommandDialog,
@@ -22,62 +32,54 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTheme } from "next-themes";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/redux/slice/authSlice";
 import Logo from "./Logo";
 import MobileHeader from "./MobileHeader";
+import { useDispatch } from "react-redux";
+import { logout } from "@/redux/slice/authSlice";
+import { useRouter } from "next/navigation";
 
-const navigationItems = [
-  {
-    title: "Home",
-    href: "/",
-  },
-  {
-    title: "Services",
-    href: "/services",
-    items: [
-      {
-        title: "Electrical Services",
-        href: "/services/electrical",
-        description: "Wiring, repair, and maintenance",
-      },
-      {
-        title: "Plumbing Services",
-        href: "/services/plumbing",
-        description: "Pipe fitting and leak repair",
-      },
-      {
-        title: "Cleaning Services",
-        href: "/services/cleaning",
-        description: "Home and office cleaning",
-      },
-      {
-        title: "AC & Refrigeration Services",
-        href: "/services/ac-refrigeration",
-        description: "AC and fridge installation & repair",
-      },
-    ],
-  },
-  {
-    title: "Actions",
-    href: "/service-providers",
-    items: [
-      {
-        title: "Hire A Service Provider",
-        href: "/service-providers",
-        description: "Find and connect with verified professionals",
-      },
-      {
-        title: "Become A Service Provider",
-        href: "/signup",
-        description: "Join our platform and offer your services",
-      },
-    ],
-  },
-];
+interface Category {
+  name: string;
+  total: number;
+}
 
 export default function DesktopHeader() {
+  const [categories, setCategories] = React.useState<Category[]>([]);
+  const [loading, setLoading] = React.useState(true);
   const [open, setOpen] = React.useState(false);
   const [searchOpen, setSearchOpen] = React.useState(false);
   const { setTheme, theme } = useTheme();
+
+  const user = useSelector(selectCurrentUser);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.push("/login");
+  };
+
+  React.useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASEURL}/service-providers/categories`,
+          { withCredentials: true }
+        );
+        setCategories(res.data.data);
+      } catch (err) {
+        console.error("Failed to fetch categories", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -90,6 +92,38 @@ export default function DesktopHeader() {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
+  const navigationItems = [
+    {
+      title: "Home",
+      href: "/",
+    },
+    {
+      title: "Services",
+      href: "/service-providers",
+      items: categories.map((category) => ({
+        title: category.name,
+        href: `/service-providers/categories/${category.name}`,
+        description: `${category.total.toLocaleString()} Providers`,
+      })),
+    },
+    {
+      title: "Actions",
+      href: "/service-providers",
+      items: [
+        {
+          title: "Hire A Service Provider",
+          href: "/service-providers",
+          description: "Find and connect with verified professionals",
+        },
+        {
+          title: "Become A Service Provider",
+          href: "/signup",
+          description: "Join our platform and offer your services",
+        },
+      ],
+    },
+  ];
+
   return (
     <>
       <header className="sticky top-0 z-50 w-full border-b backdrop-blur bg-background/95 supports-[backdrop-filter]:bg-background/60">
@@ -100,55 +134,59 @@ export default function DesktopHeader() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="flex flex-1 items-center justify-between space-x-2 md:justify-center">
-            <div className="w-full flex-1 md:w-auto md:flex-none">
-              <NavigationMenu className="hidden md:flex">
-                <NavigationMenuList>
-                  {navigationItems.map((item) => (
-                    <NavigationMenuItem key={item.title}>
-                      {item.items ? (
-                        <>
-                          <NavigationMenuTrigger className="cursor-pointer bg-transparent">
-                            {item.title}
-                          </NavigationMenuTrigger>
-                          <NavigationMenuContent>
-                            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                              {item.items.map((subItem) => (
-                                <li key={subItem.title}>
-                                  <NavigationMenuLink asChild>
-                                    <Link
-                                      href={subItem.href}
-                                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary hover:text-background"
-                                    >
-                                      <div className="text-sm font-medium leading-none">
-                                        {subItem.title}
-                                      </div>
-                                      <p className="line-clamp-2 text-sm leading-snug">
-                                        {subItem.description}
-                                      </p>
-                                    </Link>
-                                  </NavigationMenuLink>
-                                </li>
-                              ))}
-                            </ul>
-                          </NavigationMenuContent>
-                        </>
-                      ) : (
-                        <NavigationMenuLink asChild>
-                          <Link
-                            href={item.href}
-                            className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-all data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
-                          >
-                            {item.title}
-                          </Link>
-                        </NavigationMenuLink>
-                      )}
-                    </NavigationMenuItem>
-                  ))}
-                </NavigationMenuList>
-              </NavigationMenu>
+          {loading ? (
+            <p>Loading Services...</p>
+          ) : (
+            <div className="flex flex-1 items-center justify-between space-x-2 md:justify-center">
+              <div className="w-full flex-1 md:w-auto md:flex-none">
+                <NavigationMenu className="hidden md:flex">
+                  <NavigationMenuList>
+                    {navigationItems.map((item) => (
+                      <NavigationMenuItem key={item.title}>
+                        {item.items ? (
+                          <>
+                            <NavigationMenuTrigger className="cursor-pointer bg-transparent">
+                              {item.title}
+                            </NavigationMenuTrigger>
+                            <NavigationMenuContent>
+                              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                                {item.items.map((subItem) => (
+                                  <li key={subItem.title}>
+                                    <NavigationMenuLink asChild>
+                                      <Link
+                                        href={subItem.href}
+                                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary hover:text-background"
+                                      >
+                                        <div className="font-bold leading-none">
+                                          {subItem.title}
+                                        </div>
+                                        <p className="line-clamp-2 text-sm leading-snug">
+                                          &#8226; {subItem.description}
+                                        </p>
+                                      </Link>
+                                    </NavigationMenuLink>
+                                  </li>
+                                ))}
+                              </ul>
+                            </NavigationMenuContent>
+                          </>
+                        ) : (
+                          <NavigationMenuLink asChild>
+                            <Link
+                              href={item.href}
+                              className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-all data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                            >
+                              {item.title}
+                            </Link>
+                          </NavigationMenuLink>
+                        )}
+                      </NavigationMenuItem>
+                    ))}
+                  </NavigationMenuList>
+                </NavigationMenu>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-2">
@@ -209,20 +247,57 @@ export default function DesktopHeader() {
               </SheetContent>
             </Sheet>
 
-            <Button
-              variant="outline"
-              size="sm"
-              className="cursor-pointer hidden md:block bg-transparent dark:bg-transparent"
-            >
-              <Link href="/signup">Sign Up</Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="cursor-pointer hidden md:block bg-transparent dark:bg-transparent"
-            >
-              <Link href="/login">Login</Link>
-            </Button>
+            {!user?._id ? (
+              <>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="cursor-pointer hidden md:block bg-transparent dark:bg-transparent"
+                >
+                  <Link href="/signup">Sign Up</Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="cursor-pointer hidden md:block bg-transparent dark:bg-transparent"
+                >
+                  <Link href="/login">Login</Link>
+                </Button>
+              </>
+            ) : (
+              <div className="relative group">
+                <button className="flex cursor-pointer items-center justify-center size-10 rounded-full bg-gray-100 dark:bg-slate-700 hover:bg-gray-200">
+                  <User className="w-4 h-4" />
+                </button>
+                <div className="absolute hidden group-hover:block right-0 z-50">
+                  <div className="pt-3">
+                    <div className="w-40 shadow-md rounded-md overflow-hidden bg-white">
+                      <Link
+                        href="/user/dashboard"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        <LayoutDashboard className="h-4 w-4 text-gray-500" />
+                        Dashboard
+                      </Link>
+                      <Link
+                        href="/user/settings"
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        <Settings className="h-4 w-4 text-gray-500" />
+                        Settings
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="cursor-pointer w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        <LogOut className="h-4 w-4 text-red-500" />
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </header>
