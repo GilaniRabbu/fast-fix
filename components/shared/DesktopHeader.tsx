@@ -120,6 +120,11 @@ export default function DesktopHeader() {
           href: "/signup",
           description: "Join our platform and offer your services",
         },
+        {
+          title: "Contact Support",
+          href: "/contact",
+          description: "Reach out with your queries, issues, or feedback",
+        },
       ],
     },
   ];
