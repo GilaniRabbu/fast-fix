@@ -34,7 +34,7 @@ export default function ContactForm() {
 
   return (
     <section className="py-16 md:py-8">
-      <div className="max-w-xl mx-auto px-4 md:px-8 lg:px-12">
+      <div className="max-w-2xl mx-auto px-4 md:px-8 lg:px-12">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Let’s schedule your next service with FastFix
@@ -65,7 +65,7 @@ export default function ContactForm() {
                 onChange={handleInputChange}
                 placeholder="First Name"
                 required
-                className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-border"
               />
             </div>
 
@@ -84,7 +84,7 @@ export default function ContactForm() {
                 onChange={handleInputChange}
                 placeholder="Last Name"
                 required
-                className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-border"
               />
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function ContactForm() {
               onChange={handleInputChange}
               placeholder="Email address"
               required
-              className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-border"
             />
           </div>
 
@@ -123,7 +123,7 @@ export default function ContactForm() {
               onChange={handleInputChange}
               placeholder="Phone Number"
               required
-              className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-border"
             />
           </div>
 
@@ -140,7 +140,7 @@ export default function ContactForm() {
               value={formData.subject}
               onChange={handleInputChange}
               required
-              className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full mt-2 px-4 py-2 rounded-md border bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-border"
             >
               <option value="">Select a subject</option>
               <option value="repair">Repair</option>
@@ -167,7 +167,7 @@ export default function ContactForm() {
               rows={4}
               placeholder="Any additional information..."
               required
-              className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-border"
             />
           </div>
 

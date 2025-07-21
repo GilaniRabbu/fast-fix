@@ -327,7 +327,7 @@ export default function SignupPage() {
                       required={userType === "SERVICE_PROVIDER"}
                       value={formData.profession}
                       onChange={handleChange}
-                      className="cursor-pointer mt-1 block w-full border rounded-md px-3 py-2 outline-none text-foreground/90 bg-white dark:bg-slate-800"
+                      className="cursor-pointer mt-1 block w-full border rounded-md px-3 py-2 outline-none bg-white dark:bg-slate-800"
                     >
                       <option value="">Select your profession</option>
                       <option value="Electrician">Electrician</option>
@@ -355,7 +355,7 @@ export default function SignupPage() {
                       required={userType === "SERVICE_PROVIDER"}
                       value={formData.experienceYears}
                       onChange={handleChange}
-                      className="cursor-pointer mt-1 block w-full border rounded-md px-3 py-2 outline-none text-foreground/90 bg-white dark:bg-slate-800"
+                      className="cursor-pointer mt-1 block w-full border rounded-md px-3 py-2 outline-none bg-white dark:bg-slate-800"
                     >
                       <option value="">Select experience</option>
                       <option value="0">0-1 years</option>
