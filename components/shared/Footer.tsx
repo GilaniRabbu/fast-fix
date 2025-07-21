@@ -20,7 +20,7 @@ const Footer = () => {
   const contactInfo = [
     { href: "#", label: "123 Main Street, Downtown" },
     { href: "#", label: "+880 123-456-789" },
-    { href: "#", label: "FastFix@gmail.com" },
+    { href: "#", label: "support@fastfix.com" },
   ];
 
   return (

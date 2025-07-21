@@ -12,8 +12,8 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "gilani@gmail.com",
+    password: "1234567",
   });
   const dispatch = useDispatch();
   const router = useRouter();
