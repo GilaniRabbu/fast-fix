@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Send } from "lucide-react";
-import ContainerWrapper from "@/components/common/ContainerWrapper";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -35,7 +34,7 @@ export default function ContactForm() {
 
   return (
     <section className="py-16 md:py-8">
-      <ContainerWrapper>
+      <div className="max-w-xl mx-auto px-4 md:px-8 lg:px-12">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Let’s schedule your next service with FastFix
@@ -48,13 +47,13 @@ export default function ContactForm() {
 
         <form
           onSubmit={handleSubmit}
-          className="space-y-6 bg-white p-6 rounded-2xl shadow-md"
+          className="space-y-6 p-6 rounded-2xl shadow-md bg-white dark:bg-slate-800"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
             <div>
               <label
                 htmlFor="firstName"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-muted-foreground"
               >
                 First name
               </label>
@@ -66,13 +65,14 @@ export default function ContactForm() {
                 onChange={handleInputChange}
                 placeholder="First Name"
                 required
-                className="mt-2 w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none"
+                className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
+
             <div>
               <label
                 htmlFor="lastName"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-muted-foreground"
               >
                 Last name
               </label>
@@ -84,7 +84,7 @@ export default function ContactForm() {
                 onChange={handleInputChange}
                 placeholder="Last Name"
                 required
-                className="mt-2 w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none"
+                className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
           </div>
@@ -92,7 +92,7 @@ export default function ContactForm() {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-muted-foreground"
             >
               Email address
             </label>
@@ -104,14 +104,14 @@ export default function ContactForm() {
               onChange={handleInputChange}
               placeholder="Email address"
               required
-              className="mt-2 w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none"
+              className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
 
           <div>
             <label
               htmlFor="phone"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-muted-foreground"
             >
               Phone Number
             </label>
@@ -123,14 +123,14 @@ export default function ContactForm() {
               onChange={handleInputChange}
               placeholder="Phone Number"
               required
-              className="mt-2 w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none"
+              className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
 
           <div>
             <label
               htmlFor="subject"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-muted-foreground"
             >
               Subject
             </label>
@@ -140,7 +140,7 @@ export default function ContactForm() {
               value={formData.subject}
               onChange={handleInputChange}
               required
-              className="mt-2 w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none text-gray-700"
+              className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               <option value="">Select a subject</option>
               <option value="repair">Repair</option>
@@ -155,7 +155,7 @@ export default function ContactForm() {
           <div>
             <label
               htmlFor="message"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-muted-foreground"
             >
               Message
             </label>
@@ -167,19 +167,19 @@ export default function ContactForm() {
               rows={4}
               placeholder="Any additional information..."
               required
-              className="mt-2 w-full px-4 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none"
+              className="w-full mt-2 px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-md transition-colors flex items-center justify-center gap-2"
+            className="w-full cursor-pointer py-3 font-semibold rounded-md flex items-center justify-center gap-2 transition-colors text-white bg-red-600 hover:bg-red-700"
           >
             <Send className="w-4 h-4" />
             Send Message
           </button>
         </form>
-      </ContainerWrapper>
+      </div>
     </section>
   );
 }
