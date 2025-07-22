@@ -76,7 +76,7 @@ export default function MobileHeader({ closeSidebar }: MobileHeaderProps) {
   return (
     <div className="flex flex-col space-y-3">
       {loading ? (
-        <p>Loading Services...</p>
+        <p>Loading Navigation...</p>
       ) : (
         <div className="flex flex-col space-y-3 pb-3">
           {navigationItems.map((item) => (

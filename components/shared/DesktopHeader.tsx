@@ -17,9 +17,7 @@ import { Button } from "@/components/ui/button";
 import {
   CommandDialog,
   CommandEmpty,
-  CommandGroup,
   CommandInput,
-  CommandItem,
   CommandList,
 } from "@/components/ui/command";
 import {
@@ -40,10 +38,20 @@ import MobileHeader from "./MobileHeader";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/slice/authSlice";
 import { useRouter } from "next/navigation";
+import ContainerWrapper from "@/components/common/ContainerWrapper";
 
 interface Category {
   name: string;
   total: number;
+}
+
+interface IServiceProvider {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  profession: string;
+  hourlyRate: string;
+  location: string;
 }
 
 export default function DesktopHeader() {
@@ -52,6 +60,8 @@ export default function DesktopHeader() {
   const [open, setOpen] = React.useState(false);
   const [searchOpen, setSearchOpen] = React.useState(false);
   const { setTheme, theme } = useTheme();
+  const [query, setQuery] = React.useState<string>("");
+  const [results, setResults] = React.useState<IServiceProvider[]>([]);
 
   const user = useSelector(selectCurrentUser);
 
@@ -61,6 +71,34 @@ export default function DesktopHeader() {
   const handleLogout = () => {
     dispatch(logout());
     router.push("/login");
+  };
+
+  const handleSearch = async (value: string) => {
+    if (value.trim() === "") {
+      setResults([]);
+      return;
+    }
+
+    try {
+      const res = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_BASEURL
+        }/service-providers/search?searchTerm=${encodeURIComponent(value)}`
+      );
+
+      if (!res.ok) throw new Error("Failed to fetch search results");
+
+      const data = await res.json();
+
+      if (data.success) {
+        setResults(data.data);
+      } else {
+        setResults([]);
+      }
+    } catch (error) {
+      console.error("Search error:", error);
+      setResults([]);
+    }
   };
 
   React.useEffect(() => {
@@ -140,7 +178,7 @@ export default function DesktopHeader() {
 
           {/* Desktop Navigation */}
           {loading ? (
-            <p>Loading Services...</p>
+            <p>Loading Navigation...</p>
           ) : (
             <div className="flex flex-1 items-center justify-between space-x-2 md:justify-center">
               <div className="w-full flex-1 md:w-auto md:flex-none">
@@ -309,32 +347,50 @@ export default function DesktopHeader() {
 
       {/* Search Command Dialog */}
       <CommandDialog open={searchOpen} onOpenChange={setSearchOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput
+          placeholder="Type a command or search..."
+          value={query}
+          onValueChange={(value) => {
+            setQuery(value);
+            handleSearch(value);
+          }}
+        />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Navigation">
-            {navigationItems.map((item) => (
-              <CommandItem
-                key={item.href}
-                onSelect={() => {
-                  setSearchOpen(false);
-                  // Navigate to the item
-                }}
-              >
-                {item.title}
-              </CommandItem>
-            ))}
-          </CommandGroup>
-          <CommandGroup heading="Quick Actions">
-            <CommandItem
-              onSelect={() => {
-                setSearchOpen(false);
-                setTheme(theme === "dark" ? "light" : "dark");
-              }}
-            >
-              Toggle Theme
-            </CommandItem>
-          </CommandGroup>
+          {results.length > 0 ? (
+            <div className="shadow-sm w-full z-40 relative">
+              <ContainerWrapper className="py-4">
+                <div className="space-y-4">
+                  {results.map((provider) => (
+                    <div
+                      key={provider._id}
+                      className="p-4 border rounded-md transition"
+                    >
+                      <p className="font-bold dark:text-[#202020]">
+                        {provider.firstName} {provider.lastName}
+                      </p>
+                      <p className="text-sm text-muted-foreground dark:text-[#202020]">
+                        {provider.profession}
+                      </p>
+                      <p className="text-sm text-muted-foreground dark:text-[#202020]">
+                        {provider.hourlyRate}
+                      </p>
+                      <p className="text-sm text-muted-foreground dark:text-[#202020]">
+                        {provider.location}
+                      </p>
+                      <Link
+                        href={`/service-providers/${provider._id}`}
+                        className="text-sm font-bold text-indigo-600 dark:text-slate-950 hover:underline"
+                      >
+                        Contact Provider
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </ContainerWrapper>
+            </div>
+          ) : (
+            <CommandEmpty>No results found.</CommandEmpty>
+          )}
         </CommandList>
       </CommandDialog>
     </>
