@@ -4,6 +4,8 @@ import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/redux/slice/authSlice";
 
 interface Category {
   name: string;
@@ -17,6 +19,8 @@ interface MobileHeaderProps {
 export default function MobileHeader({ closeSidebar }: MobileHeaderProps) {
   const [categories, setCategories] = React.useState<Category[]>([]);
   const [loading, setLoading] = React.useState(true);
+  const user = useSelector(selectCurrentUser);
+  console.log(user);
 
   React.useEffect(() => {
     const fetchCategories = async () => {
@@ -107,24 +111,35 @@ export default function MobileHeader({ closeSidebar }: MobileHeaderProps) {
         </div>
       )}
 
-      <div className="pt-4 pb-6">
+      <div className="pb-6">
         <div className="flex flex-col space-y-3">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={closeSidebar}
-            className="cursor-pointer bg-transparent dark:bg-transparent"
-          >
-            <Link href="/signup">Sign Up</Link>
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={closeSidebar}
-            className="cursor-pointer bg-transparent dark:bg-transparent"
-          >
-            <Link href="/login">Login</Link>
-          </Button>
+          {!user?._id ? (
+            <>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={closeSidebar}
+                className="cursor-pointer bg-transparent dark:bg-transparent"
+              >
+                <Link href="/signup">Sign Up</Link>
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={closeSidebar}
+                className="cursor-pointer bg-transparent dark:bg-transparent"
+              >
+                <Link href="/login">Login</Link>
+              </Button>
+            </>
+          ) : (
+            <div className="text-sm text-muted-foreground pt-4 border-t">
+              <p className="font-bold">
+                Welcome, {user.firstName} {user.lastName}
+              </p>
+              <p className="text-xs">{user.email}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

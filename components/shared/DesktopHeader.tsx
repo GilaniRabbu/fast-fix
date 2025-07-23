@@ -62,6 +62,8 @@ export default function DesktopHeader() {
   const { setTheme, theme } = useTheme();
   const [query, setQuery] = React.useState<string>("");
   const [results, setResults] = React.useState<IServiceProvider[]>([]);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
 
   const user = useSelector(selectCurrentUser);
 
@@ -128,6 +130,37 @@ export default function DesktopHeader() {
     };
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
+  }, []);
+
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Trigger once on mount
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const navigationItems = [
@@ -308,12 +341,15 @@ export default function DesktopHeader() {
                 </Button>
               </>
             ) : (
-              <div className="relative group">
-                <button className="flex cursor-pointer items-center justify-center size-10 rounded-full bg-gray-100 dark:bg-slate-700 hover:bg-gray-200">
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="flex cursor-pointer items-center justify-center size-10 rounded-full bg-gray-100 dark:bg-slate-700 hover:bg-gray-200"
+                >
                   <User className="w-4 h-4" />
                 </button>
-                <div className="absolute hidden group-hover:block right-0 z-50">
-                  <div className="pt-3">
+                {isOpen && (
+                  <div className="absolute right-0 z-50 pt-3">
                     <div className="w-40 shadow-md rounded-md overflow-hidden bg-white">
                       <Link
                         href="/user/dashboard"
@@ -331,14 +367,14 @@ export default function DesktopHeader() {
                       </Link>
                       <button
                         onClick={handleLogout}
-                        className="cursor-pointer w-full text-left flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="w-full cursor-pointer text-left flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
                         <LogOut className="h-4 w-4 text-red-500" />
                         Logout
                       </button>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             )}
           </div>
